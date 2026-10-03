@@ -103,6 +103,33 @@ h1 { margin: 0 0 0.25rem; font-size: 1.15rem; font-weight: 800; letter-spacing: 
 .vf-slot-no {
   font-size: 0.65rem; color: var(--vf-led); font-weight: 800;
 }
+.vf-slot-head { display: flex; justify-content: space-between; align-items: center; gap: 0.25rem; }
+.vf-zone {
+  font-size: 0.62rem; font-weight: 800; padding: 0.05rem 0.15rem;
+  border-radius: 2px; border: 1px solid #3a4656; background: #0a0c10;
+  color: var(--vf-amber); cursor: pointer;
+}
+.vf-zone-hot { color: var(--vf-amber); }
+.vf-zone-cold { color: #5cc8ff; border-color: #2c5d76; }
+.vf-slot.vf-conflict { border-color: var(--vf-red); box-shadow: inset 0 0 12px rgba(255,92,108,0.25); }
+.vf-conflict-tag {
+  margin-top: 0.25rem; font-size: 0.6rem; font-weight: 800;
+  color: var(--vf-red); text-align: center;
+}
+.vf-receipt-conflict { color: #b3323f; font-weight: 700; }
+.vf-receipt-reason { font-weight: 700; }
+.vf-receipt-note {
+  margin-top: 0.5rem; padding-top: 0.4rem; font-size: 0.72rem;
+  color: #b3323f; text-align: center; border-top: 1px dashed #c8bda0;
+}
+.vf-stat-conflict { color: var(--vf-red); }
+.vf-chip-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.vf-chip {
+  display: inline-block; padding: 0.25rem 0.55rem; border-radius: 3px;
+  font-size: 0.75rem; font-weight: 700;
+}
+.vf-chip-need { background: rgba(255,193,74,0.15); color: var(--vf-amber); border: 1px solid rgba(255,193,74,0.35); }
+.vf-chip-conflict { background: rgba(255,92,108,0.15); color: var(--vf-red); border: 1px solid rgba(255,92,108,0.35); }
 .vf-slot-sku {
   font-size: 0.72rem; margin: 0.2rem 0 auto;
   font-family: "Segoe UI", "PingFang SC", sans-serif;

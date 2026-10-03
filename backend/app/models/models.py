@@ -19,6 +19,8 @@ class Lane(Base):
     capacity: Mapped[int] = mapped_column(Integer)
     stock: Mapped[int] = mapped_column(Integer, default=0)
     in_transit: Mapped[int] = mapped_column(Integer, default=0)
+    # 温区：cold=冷 / hot=热；未标温区按热兼容（server_default 保证历史库行也有值）
+    temp_zone: Mapped[str] = mapped_column(String(8), default="hot", server_default="hot", nullable=False)
 
 class Sale(Base):
     __tablename__ = "sales"
