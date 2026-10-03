@@ -13,8 +13,9 @@ def run_refill(location_id: int = 1, db: Session = Depends(get_db)):
     loc = db.get(Location, location_id)
     if not loc: raise HTTPException(404, "点位不存在")
     lanes = db.scalars(select(Lane).where(Lane.location_id == location_id).order_by(Lane.slot_no)).all()
-    payload = [{"id": l.id, "slot_no": l.slot_no, "sku_name": l.sku_name,
-                "capacity": l.capacity, "stock": l.stock, "in_transit": l.in_transit} for l in lanes]
+    payload = [{"id": l.id, "location_id": l.location_id, "slot_no": l.slot_no, "sku_name": l.sku_name,
+                "capacity": l.capacity, "stock": l.stock, "in_transit": l.in_transit,
+                "zone": l.zone} for l in lanes]
     summary = summarize(build_fill_lines(payload))
     order = RefillOrder(location_id=location_id, created_at=datetime.utcnow(),
                         lines_json=json.dumps(summary, ensure_ascii=False))
@@ -33,6 +34,7 @@ def latest(location_id: int = 1, db: Session = Depends(get_db)):
 @router.get("/full")
 def full_lanes(location_id: int = 1, db: Session = Depends(get_db)):
     data = latest(location_id=location_id, db=db)
+    # 与补货单、汇总同一套相邻判定：满仓 = 缺口为 0；冷热冲突置 0 道仍有缺口，不在此列
     return {"location_id": location_id, "lanes": [l for l in data["lines"] if l["status"] == "full"]}
 
 @router.get("/summary")
@@ -44,4 +46,7 @@ def refill_summary(location_id: int = 1, db: Session = Depends(get_db)):
         "need_fill_count": data["need_fill_count"],
         "full_count": data["full_count"],
         "overbooked_count": data["overbooked_count"],
+        "conflict_count": data["conflict_count"],
+        # 待补集合：出正补量的货道编号，与补货单行集合同源
+        "pending_slots": data["pending_slots"],
     }

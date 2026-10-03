@@ -92,13 +92,23 @@ h1 { margin: 0 0 0.25rem; font-size: 1.15rem; font-weight: 800; letter-spacing: 
   box-shadow: inset 0 0 0 2px #3a4656;
 }
 .vf-slot {
-  aspect-ratio: 0.85;
+  min-height: 150px;
   background: linear-gradient(180deg, #1e2630, #141a22);
   border: 2px solid #3a4656;
   border-radius: 4px;
   padding: 0.4rem;
   display: flex; flex-direction: column;
   position: relative;
+}
+.vf-slot.vf-zone-cold { border-color: #4a7fb5; box-shadow: inset 0 0 12px rgba(74,127,181,0.25); }
+.vf-slot-head { display: flex; align-items: center; justify-content: space-between; gap: 0.3rem; }
+.vf-zone-tag { font-size: 0.6rem; font-weight: 800; padding: 0.05rem 0.3rem; border-radius: 2px; }
+.vf-zone-cold-tag { background: rgba(74,127,181,0.22); color: #8fc1ee; }
+.vf-zone-hot-tag { background: rgba(255,92,108,0.18); color: #ff9aa6; }
+.vf-zone-edit { margin-top: 0.3rem; font-size: 0.6rem; color: var(--vf-dim); display: flex; align-items: center; gap: 0.25rem; }
+.vf-zone-edit select {
+  font-size: 0.62rem; padding: 0.1rem 0.2rem;
+  background: #0a0e14; color: var(--vf-led); border: 1px solid #3a4656; border-radius: 2px;
 }
 .vf-slot-no {
   font-size: 0.65rem; color: var(--vf-led); font-weight: 800;
@@ -142,6 +152,14 @@ h1 { margin: 0 0 0.25rem; font-size: 1.15rem; font-weight: 800; letter-spacing: 
   font-size: 0.78rem; padding: 0.2rem 0;
   border-bottom: 1px dotted #c8bda0;
 }
+.vf-receipt-line.vf-line-conflict { color: #b0463a; }
+.vf-zone-mini { color: #5a708c; margin-left: 0.2rem; }
+.vf-reason-tag { color: #b0463a; font-weight: 700; }
+.vf-receipt-reason {
+  font-size: 0.7rem; color: #b0463a; text-align: center;
+  border-bottom: 1px dotted #c8bda0; padding: 0.15rem 0;
+}
+.vf-pending { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .vf-machine-layout {
   display: grid;
   grid-template-columns: 1fr minmax(240px, 320px);
